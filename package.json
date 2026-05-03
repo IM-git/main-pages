@@ -1,26 +1,12 @@
 {
   "name": "main-pages",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch": "tsc --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/IM-git/main-pages.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/IM-git/main-pages/issues"
-  },
-  "homepage": "https://github.com/IM-git/main-pages#readme",
   "devDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^5.9.3"
   }
 }
