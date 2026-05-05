@@ -25,9 +25,10 @@ navLinks.forEach((link) => {
 });
 
 
-const noteDisplay: HTMLElement | null = document.getElementById("main-note-text");
+const noteDisplay = document.getElementById("main-note-text");
 const noteInput = document.querySelector<HTMLTextAreaElement>("#note-input");
-const addBtn: HTMLElement | null = document.getElementById("add-btn");
+const addBtn = document.getElementById("add-btn");
+const resetBtn = document.getElementById("reset-btn");
 
 const NOTE_STORAGE_KEY = "main_note_text";
 
@@ -46,7 +47,7 @@ const formatDateTime = (date: Date): string => {
 };
 
 
-if (noteDisplay && noteInput && addBtn) {
+if (noteDisplay && noteInput && addBtn && resetBtn) {
 
   const savedNote: string | null = localStorage.getItem(NOTE_STORAGE_KEY);
   if (savedNote) {
@@ -68,4 +69,12 @@ if (noteDisplay && noteInput && addBtn) {
 
     noteInput.value = "";
   });
+
+  
+  resetBtn.addEventListener("click", () => {
+    noteDisplay.textContent = "Добро пожаловать на сайт.";
+    localStorage.removeItem(NOTE_STORAGE_KEY);
+    noteInput.value = "";
+  });
+
 }

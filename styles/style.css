@@ -98,6 +98,22 @@ main {
   background-color: #1e40af;
 }
 
+#reset-btn {
+  align-self: flex-start;
+  padding: 10px 18px;
+  font: inherit;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+#reset-btn:hover {
+  background-color: #b91c1c;
+}
+
 #main-note-text {
   white-space: pre-line;
 }
