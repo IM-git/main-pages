@@ -10,16 +10,18 @@
   <body>
     <header class="container">
       <h1>Мой сайт</h1>
-      <nav class="tabs">
-        <a class="nav-link" href="index.html">Главная</a>
-        <a class="nav-link" href="about.html">О нас</a>
-        <a class="nav-link" href="contacts.html">Контакты</a>
+      <nav class="tabs" id="main-nav">
       </nav>
     </header>
 
     <main class="container">
       <h2>Главная страница</h2>
-      <p>Добро пожаловать на сайт.</p>
+      <div id="welcome-text">
+        <textarea id="note-input" rows="3" placeholder="Введите текст"></textarea>
+        <button type="button" id="add-btn">Добавить</button>
+        <button type="button" id="reset-btn">Сброс</button>
+      </div>
+      <p id="main-note-text">Добро пожаловать на сайт.</p>
     </main>
   </body>
 </html>
