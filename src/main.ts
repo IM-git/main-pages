@@ -18,33 +18,52 @@ mainNav.innerHTML = menuItems
 
 const navLinks = mainNav.querySelectorAll<HTMLAnchorElement>(".nav-link");
 navLinks.forEach((link) => {
-  const linkPage = link.getAttribute("href");
+  const linkPage: string | null = link.getAttribute("href");
   if (linkPage === currentPage) {
     link.classList.add("active");
   }
 });
 
 
-const noteDisplay = document.getElementById("main-note-text");
-const noteInput = document.getElementById("note-input") as HTMLTextAreaElement | null;
-const addBtn = document.getElementById("add-btn");
+const noteDisplay: HTMLElement | null = document.getElementById("main-note-text");
+const noteInput = document.querySelector<HTMLTextAreaElement>("#note-input");
+const addBtn: HTMLElement | null = document.getElementById("add-btn");
+
 const NOTE_STORAGE_KEY = "main_note_text";
+
+const formatDateTime = (date: Date): string => {
+  const pad = (n: number): string => String(n).padStart(2, "0");
+
+  const hours: string = pad(date.getHours());
+  const minutes: string = pad(date.getMinutes());
+  const seconds: string = pad(date.getSeconds());
+
+  const day: string = pad(date.getDate());
+  const month: string = pad(date.getMonth() + 1);
+  const year: string = pad(date.getFullYear() % 100);
+
+  return `${hours}:${minutes}:${seconds} ${day}.${month}.${year}`;
+};
+
 
 if (noteDisplay && noteInput && addBtn) {
 
-  const savedNote = localStorage.getItem(NOTE_STORAGE_KEY);
+  const savedNote: string | null = localStorage.getItem(NOTE_STORAGE_KEY);
   if (savedNote) {
     noteDisplay.textContent = savedNote;
   }
 
   addBtn.addEventListener("click", () => {
-    const piece = noteInput.value.trim();
+    const piece: string = noteInput.value.trim();
 
     if (!piece) {
       return;
     }
 
-    noteDisplay.textContent += (noteDisplay.textContent?.length ? "\n" : "") + piece;
+    const stamp: string = formatDateTime(new Date());
+    const line: string = `${stamp} ${piece}`;
+
+    noteDisplay.textContent += (noteDisplay.textContent?.length ? "\n" : "") + line;
     localStorage.setItem(NOTE_STORAGE_KEY, noteDisplay.textContent || "");
 
     noteInput.value = "";
