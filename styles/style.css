@@ -97,3 +97,7 @@ main {
 #add-btn:active {
   background-color: #1e40af;
 }
+
+#main-note-text {
+  white-space: pre-line;
+}

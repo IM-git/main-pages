@@ -44,9 +44,9 @@ if (noteDisplay && noteInput && addBtn) {
       return;
     }
 
-    noteDisplay.textContent += (noteDisplay.textContent?.length ? " " : "") + piece;
+    noteDisplay.textContent += (noteDisplay.textContent?.length ? "\n" : "") + piece;
     localStorage.setItem(NOTE_STORAGE_KEY, noteDisplay.textContent || "");
-    
+
     noteInput.value = "";
   });
 }
