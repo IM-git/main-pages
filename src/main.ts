@@ -25,7 +25,7 @@ navLinks.forEach((link) => {
 });
 
 
-const noteDisplay = document.getElementById("welcome-text");
+const noteDisplay = document.getElementById("main-note-text");
 const noteInput = document.getElementById("note-input") as HTMLTextAreaElement | null;
 const addBtn = document.getElementById("add-btn");
 
