@@ -32,6 +32,9 @@ const resetBtn = document.getElementById("reset-btn");
 
 const NOTE_STORAGE_KEY = "main_note_text";
 
+const THEME_STORAGE_KEY = "site_theme";
+const DARK_THEME_CLASS = "dark-theme";
+
 const formatDateTime = (date: Date): string => {
   const pad = (n: number): string => String(n).padStart(2, "0");
 
@@ -77,4 +80,29 @@ if (noteDisplay && noteInput && addBtn && resetBtn) {
     noteInput.value = "";
   });
 
+}
+
+
+const themeToggleBtn = document.getElementById("theme-toggle-btn");
+
+const updateThemeButtonText = () => {
+  if (!themeToggleBtn) return;
+  const isDark = document.body.classList.contains(DARK_THEME_CLASS);
+  themeToggleBtn.textContent = isDark ? "Светлая тема" : "Темная тема";
+};
+
+const saveTheme = localStorage.getItem(THEME_STORAGE_KEY);
+
+if (saveTheme === "dark") {
+  document.body.classList.add(DARK_THEME_CLASS);
+};
+
+updateThemeButtonText();
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    const isDarkNow = document.body.classList.toggle(DARK_THEME_CLASS);
+    localStorage.setItem(THEME_STORAGE_KEY, isDarkNow ? "dark" : "light");
+    updateThemeButtonText();
+  })
 }
