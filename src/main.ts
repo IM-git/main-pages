@@ -85,7 +85,7 @@ if (noteDisplay && noteInput && addBtn && resetBtn) {
 
 const themeToggleBtn = document.getElementById("theme-toggle-btn");
 
-const updateThemeButtonText = () => {
+const updateThemeButtonText = (): void => {
   if (!themeToggleBtn) return;
   const isDark = document.body.classList.contains(DARK_THEME_CLASS);
   themeToggleBtn.textContent = isDark ? "Светлая тема" : "Темная тема";
@@ -101,7 +101,7 @@ updateThemeButtonText();
 
 if (themeToggleBtn) {
   themeToggleBtn.addEventListener("click", () => {
-    const isDarkNow = document.body.classList.toggle(DARK_THEME_CLASS);
+    const isDarkNow: boolean = document.body.classList.toggle(DARK_THEME_CLASS);
     localStorage.setItem(THEME_STORAGE_KEY, isDarkNow ? "dark" : "light");
     updateThemeButtonText();
   })
