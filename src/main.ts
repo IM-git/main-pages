@@ -4,7 +4,7 @@ const menuItems = [
   { href: "index.html", label: "Главная" },
   { href: "about.html", label: "О нас" },
   { href: "contacts.html", label: "Контакты" },
-  { href: "docs.html", label: "Документы" }
+  { href: "repos.html", label: "Репозитории" }
 ];
 
 const mainNav = document.getElementById("main-nav");

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Репозитории</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="dist/main.js" defer></script>
+  </head>
+  <body>
+    <header class="container">
+      <h1>Мой сайт</h1>
+      <nav class="tabs" id="main-nav">
+      </nav>
+    </header>
+
+    <main class="container">
+      <h2>Репозитории</h2>
+      <button type="button" id="show-repo-form-btn">Добавить репозиторий</button>
+
+      <div id="repo-form-wrapper" hidden>
+        <input
+          type="url"
+          id="repo-link-input"
+          placeholder="https://github.com/owner/repo"
+          aria-label="Ссылка на GitHub репозиторий"
+        />
+        <button type="button" id="process-repo-link-btn">Обработать</button>
+      </div>
+
+      <p id="repo-error-message" role="alert" aria-live="polite"></p>
+      <div id="repo-list" aria-live="polite"></div>
+    </main>
+  </body>
+</html>
