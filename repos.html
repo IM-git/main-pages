@@ -6,6 +6,7 @@
     <title>Репозитории</title>
     <link rel="stylesheet" href="styles/style.css" />
     <script src="dist/main.js" defer></script>
+    <script src="dist/repos.js" defer></script>
   </head>
   <body>
     <header class="container">
@@ -16,9 +17,19 @@
 
     <main class="container">
       <h2>Репозитории</h2>
-      <p>Репозиторий №1</p>
-      <p>Репозиторий №2</p>
-      <p>Репозиторий №3</p>
+      <button type="button" id="show-repo-form-btn">Добавить репозиторий</button>
+      <div id="repo-form-wrapper" hidden>
+        <input
+          type="url"
+          id="repo-link-input"
+          placeholder="https://github.com/owner/repo"
+          aria-label="Ссылка на GitHub репозиторий"
+        />
+        <button type="button" id="process-repo-link-btn">Обработать</button>
+      </div>
+
+      <p id="repo-error-message" role="alert" aria-live="polite"></p>
+      <div id="repo-list" aria-live="polite"></div>
     </main>
   </body>
 </html>
