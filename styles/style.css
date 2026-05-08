@@ -276,6 +276,12 @@ body.dark-theme #theme-toggle-btn {
   align-items: center;
 }
 
+#repo-list p + p {
+  border-top: 1px solid #d1d5db;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
 .repo-meta-date {
   color: #0f766e;
 }
