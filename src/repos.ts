@@ -135,6 +135,11 @@ if (
       link.rel = "noopener noreferrer";
       link.className = "repo-result-link";
 
+      const deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.className = "repo-delete-btn";
+      deleteBtn.textContent = "Удалить";
+
       const dateSpan = document.createElement("span");
 
       dateSpan.className = "repo-meta-date";
@@ -166,12 +171,17 @@ if (
         shaSpan,
         authorSpan,
         branchesSpan,
-        prSpan
+        prSpan,
+        deleteBtn
       );
     
+      deleteBtn.addEventListener("click", () => {
+        item.remove();
+      });
+
       repoList.appendChild(item);
       repoLinkInput.value = "";
-      
+
     } catch {
       showError("Не удалось получить данные репозитория. Проверь ссылку и попробуй еще раз.");
     }

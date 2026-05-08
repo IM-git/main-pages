@@ -314,3 +314,18 @@ body.dark-theme #theme-toggle-btn {
   border-radius: 6px;
   padding: 2px 8px;
 }
+
+.repo-delete-btn {
+  margin-left: auto;
+  border: 1px solid #f3c2c2;
+  background: #fdecec;
+  color: #9b1c1c;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.repo-delete-btn:hover {
+  background: #fadcdc;
+}
