@@ -259,10 +259,6 @@ body.dark-theme #theme-toggle-btn {
   margin-top: 10px;
 }
 
-#repo-list p {
-  margin: 8px 0;
-}
-
 .repo-result-link {
   color: #2563eb;
   text-decoration: none;
@@ -270,4 +266,45 @@ body.dark-theme #theme-toggle-btn {
 
 .repo-result-link:hover {
   text-decoration: underline;
+}
+
+#repo-list p {
+  margin: 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.repo-meta-date {
+  color: #0f766e;
+}
+
+.repo-meta-sha {
+  color: #1d4ed8;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.repo-meta-author {
+  color: #7c3aed;
+}
+
+.repo-meta-branches {
+  color: #b45309;
+}
+
+.repo-meta-pr {
+  color: #be123c;
+}
+
+.repo-result-link,
+.repo-meta-date,
+.repo-meta-sha,
+.repo-meta-author,
+.repo-meta-branches,
+.repo-meta-pr {
+  background-color: #e5e7eb;
+  color: #1f2937;
+  border-radius: 6px;
+  padding: 2px 8px;
 }

@@ -128,20 +128,50 @@ if (
     
       const item = document.createElement("p");
       const link = document.createElement("a");
-    
+
       link.href = parsedRepo.normalizedUrl;
       link.textContent = parsedRepo.displayName;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       link.className = "repo-result-link";
-    
-      item.appendChild(link);
+
+      const dateSpan = document.createElement("span");
+
+      dateSpan.className = "repo-meta-date";
+      dateSpan.textContent = commitDate;
+
+      const shaSpan = document.createElement("span");
+
+      shaSpan.className = "repo-meta-sha";
+      shaSpan.textContent = `sha: ${shortSha}`;
+
+      const authorSpan = document.createElement("span");
+
+      authorSpan.className = "repo-meta-author";
+      authorSpan.textContent = `author: ${authorName}`;
+
+      const branchesSpan = document.createElement("span");
+
+      branchesSpan.className = "repo-meta-branches";
+      branchesSpan.textContent = `branches: ${branchesCount}`;
+
+      const prSpan = document.createElement("span");
+
+      prSpan.className = "repo-meta-pr";
+      prSpan.textContent = `open PR: ${openPrCount}`;
+
       item.append(
-        ` · ${commitDate} · sha: ${shortSha} · author: ${authorName} · branches: ${branchesCount} · open PR: ${openPrCount}`
+        link,
+        dateSpan,
+        shaSpan,
+        authorSpan,
+        branchesSpan,
+        prSpan
       );
     
       repoList.appendChild(item);
       repoLinkInput.value = "";
+      
     } catch {
       showError("Не удалось получить данные репозитория. Проверь ссылку и попробуй еще раз.");
     }
