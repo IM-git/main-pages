@@ -219,3 +219,55 @@ body.dark-theme #theme-toggle-btn {
   color: #e5e7eb;
   border-color: #334155;
 }
+
+#show-repo-form-btn,
+#process-repo-link-btn {
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  background-color: #f5f7fb;
+  color: #1f2937;
+}
+
+#repo-form-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#repo-link-input {
+  min-width: 280px;
+  flex: 1;
+  padding: 10px 12px;
+  font: inherit;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+#repo-error-message {
+  margin: 10px 0 0;
+  color: #b91c1c;
+  min-height: 20px;
+}
+
+#repo-list {
+  margin-top: 10px;
+}
+
+#repo-list p {
+  margin: 8px 0;
+}
+
+.repo-result-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.repo-result-link:hover {
+  text-decoration: underline;
+}
