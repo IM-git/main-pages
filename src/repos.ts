@@ -1,4 +1,3 @@
-const showRepoFormBtn = document.getElementById("show-repo-form-btn");
 const repoFormWrapper = document.getElementById("repo-form-wrapper");
 const repoLinkInput = document.querySelector<HTMLInputElement>("#repo-link-input");
 const processRepoLinkBtn = document.getElementById("process-repo-link-btn");
@@ -49,17 +48,12 @@ const showError = (message: string): void => {
 };
 
 if (
-  showRepoFormBtn &&
   repoFormWrapper &&
   repoLinkInput &&
   processRepoLinkBtn &&
   repoErrorMessage &&
   repoList
 ) {
-  showRepoFormBtn.addEventListener("click", () => {
-    repoFormWrapper.hidden = false;
-    repoLinkInput.focus();
-  });
 
   processRepoLinkBtn.addEventListener("click", () => {
     clearError();
