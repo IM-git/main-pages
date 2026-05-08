@@ -9,6 +9,16 @@ type ParsedRepo = {
   displayName: string;
 };
 
+type GithubCommitResponse = {
+  sha: string;
+  commit: {
+    author: {
+      name: string;
+      date: string;
+    };
+  };
+};
+
 const normalizeGithubRepoUrl = (rawUrl: string): ParsedRepo | null => {
   const trimmed = rawUrl.trim();
   if (!trimmed) return null;
@@ -39,6 +49,36 @@ const normalizeGithubRepoUrl = (rawUrl: string): ParsedRepo | null => {
   };
 };
 
+const fetchJson = async <T>(url: string): Promise<T> => {
+  const response = await fetch(url);
+
+  if (response.ok) {
+    throw new Error(`GitHub API error: ${response.status}`);
+  }
+  return (await response.json()) as T;
+};
+
+const formatCommitDate = (isoDate: string): string => {
+  const date = new Date(isoDate);
+  const pad = (n: number): string => String(n).padStart(2, "0");
+
+  return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+};
+
+const fetchBranchesCount = async (owner: string, repo: string): Promise<number> => {
+  const branches = await fetchJson<Array<unknown>>(
+    `https://api.github.com/repos/${owner}/${repo}/branches?per_page=100`
+  );
+  return branches.concat.length;
+};
+
+const fetchOpenPrCount = async (owner: string, repo: string): Promise<number> => {
+  const pulls = await fetchJson<Array<unknown>>(
+    `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=100`
+  );
+  return pulls.concat.length;
+};
+
 const clearError = (): void => {
   if (repoErrorMessage) repoErrorMessage.textContent = "";
 };
@@ -55,7 +95,7 @@ if (
   repoList
 ) {
 
-  processRepoLinkBtn.addEventListener("click", () => {
+  processRepoLinkBtn.addEventListener("click", async () => {
     clearError();
 
     const parsedRepo = normalizeGithubRepoUrl(repoLinkInput.value);
@@ -64,17 +104,46 @@ if (
       return;
     }
 
-    const item = document.createElement("p");
-    const link = document.createElement("a");
-
-    link.href = parsedRepo.normalizedUrl;
-    link.textContent = parsedRepo.displayName;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.className = "repo-result-link";
-
-    item.appendChild(link);
-    repoList.appendChild(item);
-    repoLinkInput.value = "";
+    try {
+      const [owner, repo] = parsedRepo.displayName.split("/");
+    
+      const commits = await fetchJson<Array<GithubCommitResponse>>(
+        `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`
+      );
+    
+      if (!commits.length) {
+        showError("Не удалось получить последний коммит.");
+        return;
+      }
+    
+      const lastCommit = commits[0];
+      const commitDate = formatCommitDate(lastCommit.commit.author.date);
+      const shortSha = lastCommit.sha.slice(0, 6);
+      const authorName = lastCommit.commit.author.name;
+    
+      const [branchesCount, openPrCount] = await Promise.all([
+        fetchBranchesCount(owner, repo),
+        fetchOpenPrCount(owner, repo)
+      ]);
+    
+      const item = document.createElement("p");
+      const link = document.createElement("a");
+    
+      link.href = parsedRepo.normalizedUrl;
+      link.textContent = parsedRepo.displayName;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = "repo-result-link";
+    
+      item.appendChild(link);
+      item.append(
+        ` · ${commitDate} · sha: ${shortSha} · author: ${authorName} · branches: ${branchesCount} · open PR: ${openPrCount}`
+      );
+    
+      repoList.appendChild(item);
+      repoLinkInput.value = "";
+    } catch {
+      showError("Не удалось получить данные репозитория. Проверь ссылку и попробуй еще раз.");
+    }
   });
 }
