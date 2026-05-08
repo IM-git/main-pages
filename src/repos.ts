@@ -52,7 +52,7 @@ const normalizeGithubRepoUrl = (rawUrl: string): ParsedRepo | null => {
 const fetchJson = async <T>(url: string): Promise<T> => {
   const response = await fetch(url);
 
-  if (response.ok) {
+  if (!response.ok) {
     throw new Error(`GitHub API error: ${response.status}`);
   }
   return (await response.json()) as T;
@@ -69,14 +69,14 @@ const fetchBranchesCount = async (owner: string, repo: string): Promise<number> 
   const branches = await fetchJson<Array<unknown>>(
     `https://api.github.com/repos/${owner}/${repo}/branches?per_page=100`
   );
-  return branches.concat.length;
+  return branches.length;
 };
 
 const fetchOpenPrCount = async (owner: string, repo: string): Promise<number> => {
   const pulls = await fetchJson<Array<unknown>>(
     `https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=100`
   );
-  return pulls.concat.length;
+  return pulls.length;
 };
 
 const clearError = (): void => {
